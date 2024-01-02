@@ -1,0 +1,57 @@
+.thebe-activate,
+.thebe-status {
+  margin-bottom: 8px;
+}
+
+.thebe-button {
+  border-radius: var(--button-large-radius) !important;
+  padding: var(--button-large-padding) !important;
+  font-weight: var(--button-large-text-weight) !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: var(--button-transition) !important;
+  box-shadow: var(--button-shadow) !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  background-color: var(--button-secondary-background-fill) !important;
+}
+
+.thebe-button:hover {
+  box-shadow: var(--button-shadow-hover) !important;
+}
+
+.thebe-run-button {
+  background-color: var(--button-primary-background-fill);
+}
+
+
+
+/* input styling */
+.CodeMirror-linenumbers,
+.CodeMirror-lines,
+.CodeMirror-scroll,
+.thebe-input {
+  background-color: var(--jp-ui-font-color0) !important;
+}
+
+.CodeMirror-activeline {
+  background-color: var(--jp-warn-color2) !important;
+}
+
+.cm-variable,
+.cm-property,
+.CodeMirror-line,
+.CodeMirror-linenumber
+.cm-operator {
+  color: var(--jp-content-font-color0) !important;
+}
+
+.cm-def {
+  color: var(--jp-brand-color1) !important;
+}
+
+.cm-string {
+  color: var(--jp-accent-color1) !important;
+}
+
