@@ -5,7 +5,7 @@ services:
       ports:
         - 8888:8888
       container_name: jupyter_scipy
-      command: "start-notebook.sh --NotebookApp.allow_origin='*' --NotebookApp.password=test --NotebookApp.token=test --NotebookApp.disable_check_xsrf=True --no-browser"
+      command: "start-notebook.sh --NotebookApp.allow_origin='*' --NotebookApp.password=secret --NotebookApp.token=secret --NotebookApp.disable_check_xsrf=True --no-browser"
       user: root
       environment:
         GRANT_SUDO: "yes"
