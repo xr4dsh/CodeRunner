@@ -23,6 +23,7 @@ $ docker compose up
 ```
 
 ! Currently a version of text-generation-webui is needed that does not change replies with code cells in them.
+! use the code from this PR: https://github.com/oobabooga/text-generation-webui/pull/5147
 
 # Usage
 Enable the extension in the `Session tab`.
