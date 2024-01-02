@@ -5,6 +5,9 @@
 - runs the code in a jupyter kernel
 - allows the use of ipywidgets
 
+
+![Screenshot_CodeRunner](https://github.com/xr4dsh/CodeRunner/assets/146959987/a79be0d9-30d3-4886-b281-48c8f4805a8b)
+
 # Setup
 To install it in text-generation-webui, go to the extensions folder and clone this repo.
 All requirements should already be installed.
