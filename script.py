@@ -4,6 +4,7 @@ import json
 from modules import chat, shared, ui_chat, html_generator
 from modules.text_generation import generate_reply_HF, generate_reply_custom
 import time
+import html
 from collections import defaultdict
 
 params = {
