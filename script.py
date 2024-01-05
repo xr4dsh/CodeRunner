@@ -1,7 +1,7 @@
 import gradio as gr
 import re
 import json
-from modules import chat, shared, ui_chat
+from modules import chat, shared, ui_chat, html_generator
 from modules.text_generation import generate_reply_HF, generate_reply_custom
 import time
 from collections import defaultdict
@@ -20,6 +20,26 @@ waiting_for_cell = 0
 jupyter_cells = 1
 input_evaluation = False
 
+# generate html code for jupyter code cells
+def thebe_code_block(m):
+    string = "<pre"
+    string += html.unescape(m[1])
+    string += ">"
+    string += html.unescape(m[2])
+    string += "</pre>"
+    return string
+
+# overwrite html output
+original_convert_to_markdown = html_generator.convert_to_markdown
+def convert_to_markdown_exclude_code_cells(string):
+    # Unescape jupyter cells
+    jupyter_code_block_pattern = re.compile(r'&lt;pre(.*?)&gt;(.*?)&lt;/pre&gt;', re.DOTALL)
+    if jupyter_code_block_pattern.search(string): # if it contains a code block
+        pattern = re.compile(r'&lt;pre(.*?)&gt;(.*?)&lt;/pre&gt;', re.DOTALL)
+        return pattern.sub(thebe_code_block, string)
+    else: # default behavior
+        return original_convert_to_markdown(string)
+html_generator.convert_to_markdown = convert_to_markdown_exclude_code_cells
 
 # counter added to all jupyter cells to map them later correctly to the outputs
 def count_replacements(match):
@@ -50,7 +70,6 @@ def history_modifier(history):
         for i in range(0, len(history["internal"])):
             # find and replace all <pre>
             history["internal"][i][1] = re.sub(r"<pre class=\"code\" id=\"jupyter_cell_\d+?\" .*? data-executable=\"true\" data-language=\".*?\">(.*?)</pre>", r"```python\n\1\n```", string=history["internal"][i][1], flags=re.S)
-    print(history)
     return history
 
 # reset all values
@@ -118,7 +137,7 @@ def custom_generate_reply(question, original_question, seed, state, stopping_str
                 reply = re.sub(r"```python\n(.*?)\n```", repl=count_replacements, string=reply, flags=re.S)
                 previous_generation_view += reply
                 skip_return = True
-                print("found code block", reply)
+                # print("found code block", reply)
                 yield previous_generation_view
                 break
             # stream tokens
